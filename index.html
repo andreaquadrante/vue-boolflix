@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+
+    <title>Boolflix</title>
+
+    <!-- Axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" charset="utf-8"></script>
+
+    <!-- VueJS -->
+    <script src="libs/vue.js" charset="utf-8"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <div id="root">
+
+      <header>
+          <div class="container">
+              <img src="img/logo.png" alt="logo"/>
+          </div>
+      </header>
+
+      <div class="cds-container container">
+          <div class="cd" v-for="album in albums">
+              <img :src="album.poster" alt="">
+              <h3>{{album.title}}</h3>
+              <span class="author">{{album.author}}</span>
+              <span class="year">{{album.year}}</span>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="js/main.js" charset="utf-8"></script>
+
+  </body>
+</html>
