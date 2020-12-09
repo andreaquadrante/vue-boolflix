@@ -1,41 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
 
     <meta charset="utf-8">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Boolflix</title>
 
     <!-- Axios -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 
     <!-- VueJS -->
     <script src="libs/vue.js" charset="utf-8"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/969320eebd.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 
   </head>
+
   <body>
 
     <div id="root">
 
       <header>
-          <div class="container">
-              <img src="img/boolflix-logo.png" alt="logo"/>
-          </div>
-          <input type="text" name="" value="" placeholder="Cerca..." v-model="searchInput">
-      </header>
 
-      <div class="movies-container container">
-          <div class="movie" v-for="movie in movies">
-              <img src="" alt="">
-              <h3></h3>
-              <span class="originalTitle"></span>
-              <span class="language"></span>
-              <span class="rating"></span>
+        <div class="container">
+
+          <a onClick="window.location.reload()"><img src="img/boolflix-logo.png" alt="Boolflix"/></a>
+          <div class="searchBox">
+            <i class="fas fa-search"></i>
+            <input type="text" name="search" v-model="searchInput" @keydown.enter="search()" placeholder="Inserisci un titolo...">
           </div>
-      </div>
+
+        </div>
+
+        <div class="moviesContainer container">
+
+          <div class="movie" v-for="movie in searchMovie">
+
+            <img class="poster" v-if="movie.poster_path" :src="posterUri+movie.poster_path" alt="Poster">
+            <img class="poster" v-else src="img/notfound.png" alt="Poster Not Found">
+
+            <div class="movieInfo hidden">
+              <h4 class="title">{{movie.title}}<h4>
+              <span class="language"><img :src="'img/' + movie.original_language + '.png'" :alt="movie.original_language"></span>
+              <span class="vote"><i class='fa-star' v-for="star in rating" :class="(stars(movie.vote_average) >= star) ? 'fas' : 'far'"></i></span>
+              <span class="overview">{{movie.overview}}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
 
     </div>
 
@@ -43,4 +69,5 @@
     <script src="js/main.js" charset="utf-8"></script>
 
   </body>
+
 </html>
